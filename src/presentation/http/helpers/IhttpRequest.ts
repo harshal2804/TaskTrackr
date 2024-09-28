@@ -3,6 +3,5 @@ export interface IHttpRequest {
     header?: unknown;
     query?: unknown;
     params?: unknown;
-    user?: unknown;
-    path?: string;
+    path?: unknown;
 }

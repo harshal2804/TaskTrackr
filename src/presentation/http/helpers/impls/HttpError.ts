@@ -36,4 +36,11 @@ export class HttpError implements IhttpError {
             body: { error: 'Bad Request' }
         }
     }
+
+    error422(): IhttpResponse {
+        return {
+            statusCode: 422,
+            body: { error: 'Unprocessable Entity' }
+        }
+    }
 }

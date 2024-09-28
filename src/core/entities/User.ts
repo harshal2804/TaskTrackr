@@ -1,6 +1,13 @@
 import { ICreateUserDTO } from "../dtos/user/CreateUser.dto";
 import { IUpdateUserDTO } from "../dtos/user/UpdateUser.dto";
 
+export interface UserInterface {
+    name: string;
+    email: string;
+    password: string;
+    role: string;
+}
+
 export class UserEntity {
     private _name: string;
     private _email: string;

@@ -5,13 +5,13 @@ export class HttpRequest implements IHttpRequest {
     header: unknown;
     query: unknown;
     params: unknown;
-    user: unknown;
+    path: unknown;
 
-    constructor({ body, header, query, params, user }: HttpRequest) {
+    constructor({ body, header, query, params, path }: HttpRequest) {
         this.body = body;
         this.header = header;
         this.query = query;
         this.params = params;
-        this.user = user;
+        this.path = path;
     }
 }

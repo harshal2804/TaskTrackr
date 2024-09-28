@@ -12,6 +12,6 @@ export function createUserService(): IController {
     const passwordHasher: IPasswordHasher = new PasswordHasher
     const useCase: ICreateUserUseCase = new CreateUser(repository, passwordHasher);
 
-    const constroller: IController = new CreateUserController(useCase);
-    return constroller;
+    const controller: IController = new CreateUserController(useCase);
+    return controller;
 }

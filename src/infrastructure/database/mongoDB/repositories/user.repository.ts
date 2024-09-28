@@ -19,14 +19,34 @@ export class UserRepositoryMongoDB implements IUserRepository {
         return userOut;
     }
 
-    async update(id: string, data: ICreateUserDTO): Promise<IUserOutDTO> {
-        throw new Error("Method not implemented.");
+    async update(id: string, data: ICreateUserDTO): Promise<IUserOutDTO | unknown> {
+        const user = await userModel.findByIdAndUpdate(id, data);
+        if (!user) return null;
+        const userOut: IUserOutDTO = {
+            id: user.id,
+            name: user.name,
+            email: user.email,
+            role: user.role,
+            createdAt: user.createdAt
+        }
+        return userOut;
     }
     async delete(id: string): Promise<boolean> {
-        throw new Error("Method not implemented.");
+        const user = await userModel.findByIdAndDelete(id);
+        if (!user) return false;
+        return true;
     }
     async findById(id: string): Promise<IUserOutDTO | unknown> {
-        throw new Error("Method not implemented.");
+        const user = await userModel.findById(id);
+        if (!user) return null;
+        const userOut: IUserOutDTO = {
+            id: user.id,
+            name: user.name,
+            email: user.email,
+            role: user.role,
+            createdAt: user.createdAt
+        }
+        return userOut;
     }
     async findByEmail(email: string): Promise<IUserOutDTO | unknown> {
         const user = await userModel.findOne({ email });

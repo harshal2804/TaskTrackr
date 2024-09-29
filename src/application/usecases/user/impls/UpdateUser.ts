@@ -3,7 +3,7 @@ import { IUpdateUserDTO } from "../../../../core/dtos/user/UpdateUser.dto";
 import { IUserRepository } from "../../../repositiories/user.repository";
 import { IUpdateUserUseCase } from "../UpdateUser";
 
-export class UpdateUser implements IUpdateUserUseCase {
+export class updateUser implements IUpdateUserUseCase {
     constructor(
         private userRepository: IUserRepository,
     ) {}

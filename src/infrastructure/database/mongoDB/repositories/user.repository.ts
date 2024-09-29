@@ -3,7 +3,7 @@ import { ICreateUserDTO } from "../../../../core/dtos/user/CreateUser.dto";
 import { IUserOutDTO } from "../../../../core/dtos/user/UserOut.dto";
 import userModel from "../models/user.model";
 
-export class UserRepositoryMongoDB implements IUserRepository {
+export class userRepositoryMongoDB implements IUserRepository {
     async create(data: ICreateUserDTO): Promise<IUserOutDTO> {
         const user = await userModel.create({
             ...data,

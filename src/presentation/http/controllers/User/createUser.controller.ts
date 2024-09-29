@@ -9,7 +9,7 @@ import { HttpResponse } from "../../helpers/impls/HttpResponse";
 import { HttpSuccess } from "../../helpers/impls/HttpSuccess";
 import { IController } from "../controller";
 
-export class CreateUserController implements IController {
+export class createUserController implements IController {
     
     constructor(
         private createUserUseCase: ICreateUserUseCase,

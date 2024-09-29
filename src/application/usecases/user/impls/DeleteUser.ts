@@ -2,7 +2,7 @@ import { IResponseDTO } from "../../../../core/dtos/response.dto";
 import { IUserRepository } from "../../../repositiories/user.repository";
 import { IDeleteUserUseCase } from "../DeleteUser";
 
-export class DeleteUser implements IDeleteUserUseCase {
+export class deleteUser implements IDeleteUserUseCase {
     constructor(
         private userRepository: IUserRepository,
     ) {}

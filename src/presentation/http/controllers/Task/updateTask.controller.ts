@@ -1,36 +1,40 @@
-import { ICreateTaskUseCase } from "../../../../application/usecases/task/CreateTask";
-import { IhttpError } from "../../helpers/IhttpError";
 import { IHttpRequest } from "../../helpers/IhttpRequest";
 import { IhttpResponse } from "../../helpers/IhttpResponse";
+import { IController } from "../controller";
+import { IhttpError } from "../../helpers/IhttpError";
 import { IhttpSuccess } from "../../helpers/IhttpSuccess";
 import { HttpError } from "../../helpers/impls/HttpError";
 import { HttpResponse } from "../../helpers/impls/HttpResponse";
 import { HttpSuccess } from "../../helpers/impls/HttpSuccess";
-import { IController } from "../controller";
+import { IUpdateTaskUseCase } from "../../../../application/usecases/task/UpdateTask";
+import { IResponseDTO } from "../../../../core/dtos/response.dto";
 
-export class createTaskController implements IController {
+export class updateTaskController implements IController {
     constructor(
-        private crateTaskUseCase: ICreateTaskUseCase,
+        private updateTaskUseCase: IUpdateTaskUseCase,
         private httpSucccess: IhttpSuccess = new HttpSuccess(),
         private httpError: IhttpError = new HttpError()
     ) {}
 
     async handle(request: IHttpRequest): Promise<IhttpResponse> {
         let error;
-        let response;
+        let response: IResponseDTO;
 
-        if (request.body && Object.keys(request.body).length > 0) {
+        if (request.params && request.body && Object.keys(request.body).length > 0) {
             const bodyParams = Object.keys(request.body);
-
+            const pathStringParams = Object.keys(request.params);
             if (
-                bodyParams.includes('title') &&
-                bodyParams.includes('description') &&
-                bodyParams.includes('dueDate') &&
-                bodyParams.includes('status') &&
-                bodyParams.includes('assignedTo') &&
-                bodyParams.includes('assignedBy')
+                pathStringParams.includes('id') &&
+                (bodyParams.includes('title') ||
+                    bodyParams.includes('description') ||
+                    bodyParams.includes('dueDate') ||
+                    bodyParams.includes('status') ||
+                    bodyParams.includes('assignedTo') ||
+                    bodyParams.includes('assignedBy')
+                )
             ) {
-                const createTaskRequestDTO = request.body as {
+                const id = (request.params as { id: string }).id;
+                const data = request.body as {
                     title: string,
                     description: string,
                     dueDate: Date,
@@ -39,7 +43,7 @@ export class createTaskController implements IController {
                     assignedBy: string
                 }
 
-                response = await this.crateTaskUseCase.execute(createTaskRequestDTO);
+                response = await this.updateTaskUseCase.execute(id, data);
             } else {
                 error = this.httpError.error422();
                 return new HttpResponse(error.statusCode, error.body);

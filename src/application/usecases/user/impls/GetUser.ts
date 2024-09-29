@@ -2,7 +2,7 @@ import { IResponseDTO } from "../../../../core/dtos/response.dto";
 import { IUserRepository } from "../../../repositiories/user.repository";
 import { IGetUserUseCase } from "../GetUser";
 
-export class GetUser implements IGetUserUseCase {
+export class getUser implements IGetUserUseCase {
 
     constructor(
         private userRespository: IUserRepository,

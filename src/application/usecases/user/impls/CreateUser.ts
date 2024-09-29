@@ -4,7 +4,7 @@ import { IPasswordHasher } from "../../../providers/PasswordHasher";
 import { IUserRepository } from "../../../repositiories/user.repository";
 import { ICreateUserUseCase } from "../CreateUser";
 
-export class CreateUser implements ICreateUserUseCase {
+export class createUser implements ICreateUserUseCase {
 
     constructor(
         private userRepository: IUserRepository,

@@ -5,7 +5,7 @@ import { ITaskDTO } from "../../../../core/dtos/task/Task.dto";
 import { IUpdateTaskDTO } from "../../../../core/dtos/task/UpdateTask.dto";
 import taskModel from "../models/task.model";
 
-export class TaskRepositoryMongoDB implements ITaskRepository {
+export class taskRepositoryMongoDB implements ITaskRepository {
     async create(data: ICreateTaskDTO): Promise<ITaskDTO> {
         const task = await taskModel.create({
             ...data,

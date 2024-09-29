@@ -1,12 +1,12 @@
 import { createTaskUseCase } from "../../../application/usecases/task/Impls/CreateTask";
 import { IController } from "../../../presentation/http/controllers/controller";
-import { CreateTaskController } from "../../../presentation/http/controllers/Task/createTask.controller";
-import { TaskRepositoryMongoDB } from "../../database/mongoDB/repositories/task.repository";
+import { createTaskController } from "../../../presentation/http/controllers/Task/createTask.controller";
+import { taskRepositoryMongoDB } from "../../database/mongoDB/repositories/task.repository";
 
 export function createTaskService(): IController {
-    const repository = new TaskRepositoryMongoDB();
+    const repository = new taskRepositoryMongoDB();
     const useCase = new createTaskUseCase(repository);
 
-    const controller = new CreateTaskController(useCase);
+    const controller = new createTaskController(useCase);
     return controller;
 }

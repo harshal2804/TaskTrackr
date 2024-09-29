@@ -1,5 +1,5 @@
-import { ITaskDTO } from "../../../core/dtos/task/Task.dto";
+import { IResponseDTO } from "../../../core/dtos/response.dto";
 
 export interface IGetManyTaskUseCase {
-    execute(): Promise<ITaskDTO[]>;
+    execute(): Promise<IResponseDTO>;
 }

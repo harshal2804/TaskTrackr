@@ -4,6 +4,7 @@ import bodyParser from 'body-parser';
 import { connectToMongo } from '../../infrastructure/database/mongoDB/connection';
 import { userRouter } from './routes/user.routes';
 import './environment';
+import { taskRouter } from './routes/task.routes';
 
 const app = express();
 
@@ -14,6 +15,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 //Handling routes
 app.use("/api/user", userRouter);
+app.use("/api/task", taskRouter);
 
 //Database connection
 connectToMongo(process.env.MONGO_URI || 'mongodb://localhost:27017/tasktrackr');

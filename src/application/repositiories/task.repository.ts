@@ -4,7 +4,7 @@ import { IUpdateTaskDTO } from "../../core/dtos/task/UpdateTask.dto";
 
 export interface ITaskRepository {
     create(task: ICreateTaskDTO): Promise<ITaskDTO>;
-    update(task: IUpdateTaskDTO): Promise<ITaskDTO>;
+    update(id: string, task: IUpdateTaskDTO): Promise<ITaskDTO | unknown>;
     delete(id: string): Promise<boolean>;
     findById(id: string): Promise<ITaskDTO | unknown>;
     findMany(): Promise<ITaskDTO[]>;

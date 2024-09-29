@@ -6,4 +6,6 @@ export interface ITaskDTO {
     status: string;
     assignedTo: string;
     assignedBy: string;
+    createdAt: Date;
+    updatedAt: Date;
 }

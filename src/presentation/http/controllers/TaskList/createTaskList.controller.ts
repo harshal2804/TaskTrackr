@@ -22,7 +22,6 @@ export class craeteTaskListController implements IController {
 
         if (request.body && Object.keys(request.body).length > 0) {
             const bodyParams = Object.keys(request.body);
-            console.log(bodyParams);
 
             if (bodyParams.includes('title') && bodyParams.includes('description') && bodyParams.includes('owner')) {
                 const createTaskListCreateDTO = request.body as {

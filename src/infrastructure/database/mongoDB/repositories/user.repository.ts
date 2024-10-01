@@ -1,5 +1,6 @@
 import { IUserRepository } from "../../../../application/repositiories/user.repository";
 import { ICreateUserDTO } from "../../../../core/dtos/user/CreateUser.dto";
+import { IUserInDTO } from "../../../../core/dtos/user/UserIn.dto";
 import { IUserOutDTO } from "../../../../core/dtos/user/UserOut.dto";
 import userModel from "../models/user.model";
 
@@ -36,26 +37,28 @@ export class userRepositoryMongoDB implements IUserRepository {
         if (!user) return false;
         return true;
     }
-    async findById(id: string): Promise<IUserOutDTO | unknown> {
+    async findById(id: string): Promise<IUserInDTO | null> {
         const user = await userModel.findById(id);
         if (!user) return null;
-        const userOut: IUserOutDTO = {
+        const userOut: IUserInDTO = {
             id: user.id,
             name: user.name,
             email: user.email,
             role: user.role,
+            password: user.password,
             createdAt: user.createdAt
         }
         return userOut;
     }
-    async findByEmail(email: string): Promise<IUserOutDTO | unknown> {
+    async findByEmail(email: string): Promise<IUserInDTO | null> {
         const user = await userModel.findOne({ email });
         if (!user) return null;
-        const userOut: IUserOutDTO = {
+        const userOut: IUserInDTO = {
             id: user.id,
             name: user.name,
             email: user.email,
             role: user.role,
+            password: user.password,
             createdAt: user.createdAt
         }
         return userOut;

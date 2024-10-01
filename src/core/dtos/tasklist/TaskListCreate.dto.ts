@@ -1,4 +1,4 @@
-export interface ITaskListCreateDTO {
+export interface ICreateTaskListDTO {
     title: string;
     description: string;
     owner: string;

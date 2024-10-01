@@ -10,6 +10,13 @@ export class createTaskUseCase implements ICreateTaskUseCase {
 
     async execute(data: ICreateTaskDTO): Promise<IResponseDTO> {
         const task = await this.taskRepository.create(data);
+        if(!task) {
+            return {
+                success: false,
+                statusCode: 400,
+                data: 'TaskList for this task does not exist'
+            };
+        }
         return {
             success: true,
             statusCode: 201,

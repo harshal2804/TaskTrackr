@@ -1,17 +1,17 @@
+import { IUpdateTaskListUseCase } from "../../../../application/usecases/tasklist/UpdateTaskList";
+import { IResponseDTO } from "../../../../core/dtos/response.dto";
+import { IhttpError } from "../../helpers/IhttpError";
 import { IHttpRequest } from "../../helpers/IhttpRequest";
 import { IhttpResponse } from "../../helpers/IhttpResponse";
-import { IController } from "../controller";
-import { IhttpError } from "../../helpers/IhttpError";
 import { IhttpSuccess } from "../../helpers/IhttpSuccess";
 import { HttpError } from "../../helpers/impls/HttpError";
 import { HttpResponse } from "../../helpers/impls/HttpResponse";
 import { HttpSuccess } from "../../helpers/impls/HttpSuccess";
-import { IUpdateTaskUseCase } from "../../../../application/usecases/task/UpdateTask";
-import { IResponseDTO } from "../../../../core/dtos/response.dto";
+import { IController } from "../controller";
 
-export class updateTaskController implements IController {
+export class updateTaskListController implements IController {
     constructor(
-        private updateTaskUseCase: IUpdateTaskUseCase,
+        private updateTaskListUseCase: IUpdateTaskListUseCase,
         private httpSucccess: IhttpSuccess = new HttpSuccess(),
         private httpError: IhttpError = new HttpError()
     ) {}
@@ -27,24 +27,18 @@ export class updateTaskController implements IController {
                 pathStringParams.includes('id') &&
                 (
                     bodyParams.includes('title') ||
-                    bodyParams.includes('taskListId') ||
                     bodyParams.includes('description') ||
-                    bodyParams.includes('dueDate') ||
-                    bodyParams.includes('status') ||
-                    bodyParams.includes('assignedTo')
+                    bodyParams.includes('owner')
                 )
             ) {
                 const id = (request.params as { id: string }).id;
                 const data = request.body as {
                     title: string,
-                    taskListId: string,
                     description: string,
-                    dueDate: Date,
-                    status: string,
-                    assignedTo: string
+                    owner: string
                 }
 
-                response = await this.updateTaskUseCase.execute(id, data);
+                response = await this.updateTaskListUseCase.execute(id, data);
             } else {
                 error = this.httpError.error422();
                 return new HttpResponse(error.statusCode, error.body);

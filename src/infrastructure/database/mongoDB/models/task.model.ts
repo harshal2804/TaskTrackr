@@ -1,17 +1,22 @@
 import { Schema, Types, model } from "mongoose";
 
-interface Task {
+export interface Task {
+    taskListId: Types.ObjectId;
     title: string;
     description: string;
     dueDate: Date;
     status: string;
     assignedTo: Types.ObjectId;
-    assignedBy: Types.ObjectId;
     createdAt: Date;
     updatedAt: Date;
 }
 
 const taskSchema = new Schema<Task>({
+    taskListId: {
+        type: Schema.Types.ObjectId,
+        ref: 'TaskList',
+        required: true
+    },
     title: {
         type: String,
         required: true,
@@ -35,10 +40,6 @@ const taskSchema = new Schema<Task>({
         max: 255
     },
     assignedTo: {
-        type: Schema.Types.ObjectId,
-        ref: 'User',
-    },
-    assignedBy: {
         type: Schema.Types.ObjectId,
         ref: 'User',
     },

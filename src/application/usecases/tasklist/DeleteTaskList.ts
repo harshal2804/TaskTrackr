@@ -1,5 +1,5 @@
 import { IResponseDTO } from "../../../core/dtos/response.dto";
 
-export interface IDeletTaskListUseCase {
+export interface IDeleteTaskListUseCase {
     execute(id: string): Promise<IResponseDTO>;
 }

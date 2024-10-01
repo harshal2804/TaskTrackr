@@ -1,4 +1,5 @@
-import { ICreateTaskUseCase } from "../../../../application/usecases/task/CreateTask";
+import { ICreateTaskListUseCase } from "../../../../application/usecases/tasklist/CreateTaskList";
+import { IResponseDTO } from "../../../../core/dtos/response.dto";
 import { IhttpError } from "../../helpers/IhttpError";
 import { IHttpRequest } from "../../helpers/IhttpRequest";
 import { IhttpResponse } from "../../helpers/IhttpResponse";
@@ -8,38 +9,29 @@ import { HttpResponse } from "../../helpers/impls/HttpResponse";
 import { HttpSuccess } from "../../helpers/impls/HttpSuccess";
 import { IController } from "../controller";
 
-export class createTaskController implements IController {
+export class craeteTaskListController implements IController {
     constructor(
-        private crateTaskUseCase: ICreateTaskUseCase,
+        private createTaskListUseCase: ICreateTaskListUseCase,
         private httpSucccess: IhttpSuccess = new HttpSuccess(),
         private httpError: IhttpError = new HttpError()
     ) {}
 
     async handle(request: IHttpRequest): Promise<IhttpResponse> {
-        let error;
-        let response;
+        let error
+        let response: IResponseDTO
 
         if (request.body && Object.keys(request.body).length > 0) {
             const bodyParams = Object.keys(request.body);
+            console.log(bodyParams);
 
-            if (
-                bodyParams.includes('title') &&
-                bodyParams.includes('taskListId') &&
-                bodyParams.includes('description') &&
-                bodyParams.includes('dueDate') &&
-                bodyParams.includes('status') &&
-                bodyParams.includes('assignedTo')
-            ) {
-                const createTaskRequestDTO = request.body as {
+            if (bodyParams.includes('title') && bodyParams.includes('description') && bodyParams.includes('owner')) {
+                const createTaskListCreateDTO = request.body as {
                     title: string,
-                    taskListId: string,
                     description: string,
-                    dueDate: Date,
-                    status: string,
-                    assignedTo: string
+                    owner: string
                 }
 
-                response = await this.crateTaskUseCase.execute(createTaskRequestDTO);
+                response = await this.createTaskListUseCase.execute(createTaskListCreateDTO);
             } else {
                 error = this.httpError.error422();
                 return new HttpResponse(error.statusCode, error.body);
@@ -53,8 +45,9 @@ export class createTaskController implements IController {
             const success = this.httpSucccess.success201(response.data);
             return new HttpResponse(success.statusCode, success.body);
         }
-
+        
         error = this.httpError.error500();
         return new HttpResponse(error.statusCode, error.body);
+
     }
 }

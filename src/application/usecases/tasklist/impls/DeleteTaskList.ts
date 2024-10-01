@@ -1,8 +1,8 @@
 import { IResponseDTO } from "../../../../core/dtos/response.dto";
 import { ITaskListRepository } from "../../../repositiories/tasklist.repository";
-import { IDeletTaskListUseCase } from "../DeleteTaskList";
+import { IDeleteTaskListUseCase } from "../DeleteTaskList";
 
-export class deleteTaskListUseCase implements IDeletTaskListUseCase {
+export class deleteTaskListUseCase implements IDeleteTaskListUseCase {
     constructor(
         private repository: ITaskListRepository
     ) {}

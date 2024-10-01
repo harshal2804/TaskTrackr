@@ -1,6 +1,6 @@
 import { ITaskDTO } from "../task/Task.dto";
 
-export interface ITaskListUpdateDTO {
+export interface IUpdateTaskListDTO {
     id?: string;
     title?: string;
     description?: string;
